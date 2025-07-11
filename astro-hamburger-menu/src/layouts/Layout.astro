@@ -1,0 +1,29 @@
+---
+import HamburgerMenu from '../components/HamburgerMenu.astro';
+import '../styles/global.css'; // Ensure Tailwind global styles are imported
+
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-white shadow-md p-4 flex justify-between items-center">
+      <div class="text-xl font-bold">My Astro Site</div>
+      <HamburgerMenu />
+    </header>
+    <main class="p-4">
+      <slot />
+    </main>
+    <footer class="bg-gray-200 text-center p-4 mt-8">
+      Copyright &copy; {new Date().getFullYear()} My Astro Site
+    </footer>
+  </body>
+</html>

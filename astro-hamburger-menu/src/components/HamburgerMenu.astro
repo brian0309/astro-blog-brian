@@ -1,0 +1,94 @@
+---
+// Component script can go here if needed later for more complex logic
+---
+<div class="md:hidden">
+  <button id="menu-btn" class="z-30 block md:hidden focus:outline-none hamburger">
+    <span class="hamburger-top"></span>
+    <span class="hamburger-middle"></span>
+    <span class="hamburger-bottom"></span>
+  </button>
+</div>
+
+<div id="menu" class="fixed inset-0 z-20 flex-col items-center self-end w-full h-full m-h-screen px-6 py-1 pt-24 pb-4 tracking-widest text-white uppercase divide-y divide-gray-500 opacity-90 bg-gray-800 hidden">
+  <div class="w-full py-3 text-center">
+    <a href="#home" class="block hover:text-red-500">Home</a>
+  </div>
+  <div class="w-full py-3 text-center">
+    <a href="#about" class="block hover:text-red-500">About</a>
+  </div>
+  <div class="w-full py-3 text-center">
+    <a href="#services" class="block hover:text-red-500">Services</a>
+  </div>
+  <div class="w-full py-3 text-center">
+    <a href="#contact" class="block hover:text-red-500">Contact</a>
+  </div>
+</div>
+
+<style>
+  .hamburger {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .hamburger-top,
+  .hamburger-middle,
+  .hamburger-bottom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: #000; /* Black color for hamburger lines */
+    transform: rotate(0);
+    transition: all 0.5s;
+  }
+
+  .hamburger-middle {
+    transform: translateY(7px);
+  }
+
+  .hamburger-bottom {
+    transform: translateY(14px);
+  }
+
+  .open {
+    transform: rotate(90deg);
+    transform: translateY(0px);
+  }
+
+  .open .hamburger-top {
+    transform: rotate(45deg) translateY(6px) translateX(6px);
+  }
+
+  .open .hamburger-middle {
+    display: none;
+  }
+
+  .open .hamburger-bottom {
+    transform: rotate(-45deg) translateY(6px) translateX(-6px);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
+
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('flex'); // Use flex to show it
+  });
+
+  // Close menu when a link is clicked
+  const links = menu.querySelectorAll('a');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      btn.classList.remove('open');
+      menu.classList.add('hidden');
+      menu.classList.remove('flex');
+    });
+  });
+</script>
