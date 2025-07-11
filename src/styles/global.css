@@ -49,6 +49,12 @@ body {
 	color: rgb(var(--black));
 	font-size: 18px;
 	line-height: 1.8;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+	background: rgb(var(--gray-dark));
+	color: rgb(var(--paper));
 }
 
 main {
@@ -60,6 +66,12 @@ main {
 	box-shadow: var(--paper-shadow);
 	border-radius: 2px;
 	position: relative;
+	transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.dark main {
+	background: rgb(var(--black));
+	box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
 main::before {
@@ -75,6 +87,16 @@ main::before {
 	border-radius: 2px;
 }
 
+html.dark main::before {
+	background: repeating-linear-gradient(
+		45deg,
+		rgba(0, 0, 0, 0.1),
+		rgba(0, 0, 0, 0.1) 1px,
+		transparent 1px,
+		transparent 3px
+	);
+}
+
 h1,
 h2,
 h3,
@@ -86,6 +108,16 @@ h6 {
 	line-height: 1.2;
 	font-family: 'Atkinson', Georgia, serif;
 	font-weight: 700;
+	transition: color 0.3s ease;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+	color: rgb(var(--paper));
 }
 
 h1 {

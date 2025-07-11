@@ -1,6 +1,7 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import ThemeToggle from './ThemeToggle.jsx';
 ---
 
 <header>
@@ -12,6 +13,7 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 		<div class="social-links">
+			<ThemeToggle client:load />
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
 				<span class="sr-only">Follow Astro on Mastodon</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
@@ -43,11 +45,15 @@ import { SITE_TITLE } from '../consts';
 	header {
 		margin: 0;
 		padding: 0 1em;
-		background: white;
-		box-shadow: var(--paper-shadow);
+		background-color: rgba(255, 255, 255, 0.7); /* Translucent white */
+		backdrop-filter: blur(10px); /* Glass effect */
 		position: sticky;
 		top: 0;
 		z-index: 1000;
+	}
+
+	html.dark header {
+		background-color: rgba(0, 0, 0, 0.7); /* Translucent black for dark mode */
 	}
 	
 	header::before {

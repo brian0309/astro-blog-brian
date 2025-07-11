@@ -12,6 +12,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <html lang="en">
 	<head>
+		<script is:inline>
+			const theme = localStorage.getItem('theme');
+			if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark');
+			}
+		</script>
 		<BaseHead title={title} description={description} />
 		<style>
 			main {
@@ -33,7 +39,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
-				color: rgb(var(--gray-dark));
+				color: rgb(var(--black)); /* Changed from --gray-dark to --black */
 			}
 			.title {
 				margin-bottom: 1em;
