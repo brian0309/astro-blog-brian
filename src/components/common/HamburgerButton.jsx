@@ -4,11 +4,11 @@ export default function HamburgerButton() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
-    const sidebar = document.getElementById('mobile-sidebar');
-    if (sidebar) {
-      sidebar.classList.toggle('translate-x-full');
-      setIsOpen(!isOpen);
-    }
+    // Dispatch custom event to open sidebar
+    window.dispatchEvent(new CustomEvent('open-sidebar', {
+      detail: { type: 'open-sidebar' }
+    }));
+    setIsOpen(!isOpen);
   };
 
   return (
