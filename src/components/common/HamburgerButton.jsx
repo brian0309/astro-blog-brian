@@ -1,7 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function HamburgerButton() {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Listen for sidebar-closed event
+  useEffect(() => {
+    function handleSidebarClosed() {
+      setIsOpen(false);
+    }
+    window.addEventListener('sidebar-closed', handleSidebarClosed);
+    return () => window.removeEventListener('sidebar-closed', handleSidebarClosed);
+  }, []);
 
   const handleClick = () => {
     // Dispatch custom event to open sidebar
@@ -14,13 +23,26 @@ export default function HamburgerButton() {
   return (
     <button 
       onClick={handleClick}
-      className="md:hidden flex flex-col justify-center items-center w-8 h-8"
+      className="md:hidden flex items-center justify-center w-8 h-8 group"
       aria-label="Toggle menu"
       data-hamburger
     >
-      <span className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-1'}`}></span>
-      <span className={`block w-6 h-0.5 bg-current transition-all duration-300 mt-1.5 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
-      <span className={`block w-6 h-0.5 bg-current transition-all duration-300 mt-1.5 ${isOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-1'}`}></span>
+      <div className="relative w-6 h-6 flex items-center justify-center">
+        {isOpen ? (
+          // X state
+          <>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out rotate-45 group-hover:rotate-[225deg]"></span>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out -rotate-45 group-hover:-rotate-[225deg]"></span>
+          </>
+        ) : (
+          // Hamburger state
+          <>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out -translate-y-1.5 group-hover:translate-y-0 group-hover:rotate-45"></span>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out group-hover:opacity-0"></span>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out translate-y-1.5 group-hover:translate-y-0 group-hover:-rotate-45"></span>
+          </>
+        )}
+      </div>
     </button>
   );
 }

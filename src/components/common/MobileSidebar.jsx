@@ -21,6 +21,10 @@ export default function MobileSidebar() {
       if (open && sidebar && !sidebar.contains(e.target) && 
           !e.target.closest('[data-hamburger]')) {
         setOpen(false);
+        // Dispatch event to notify hamburger button
+        window.dispatchEvent(new CustomEvent('sidebar-closed', {
+          detail: { type: 'sidebar-closed' }
+        }));
       }
     }
     
@@ -40,6 +44,10 @@ export default function MobileSidebar() {
   const handleClose = (e) => {
     e.stopPropagation();
     setOpen(false);
+    // Dispatch event to notify hamburger button
+    window.dispatchEvent(new CustomEvent('sidebar-closed', {
+      detail: { type: 'sidebar-closed' }
+    }));
   };
 
   return (
@@ -47,8 +55,14 @@ export default function MobileSidebar() {
       {/* Overlay */}
       {open && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
-          onClick={() => setOpen(false)}
+          className="fixed inset-0 bg-gray-900 bg-opacity-40 z-40 md:hidden"
+          onClick={() => {
+            setOpen(false);
+            // Dispatch event to notify hamburger button
+            window.dispatchEvent(new CustomEvent('sidebar-closed', {
+              detail: { type: 'sidebar-closed' }
+            }));
+          }}
           aria-label="Close sidebar overlay"
           tabIndex={-1}
           role="presentation"
@@ -57,18 +71,19 @@ export default function MobileSidebar() {
       {/* Sidebar */}
       <aside
         id="mobile-sidebar"
-        className={`fixed inset-y-0 right-0 w-64 bg-white bg-opacity-100 dark:bg-gray-900 dark:bg-opacity-100 border-l border-gray-200 dark:border-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out z-50 md:hidden ${open ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed inset-y-0 right-0 w-64 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-lg transform transition-transform duration-300 ease-in-out z-50 md:hidden ${open ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="p-4 flex flex-col h-full relative">
           {/* Close Button */}
           <button 
-            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 focus:outline-none"
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white focus:outline-none group"
             onClick={handleClose}
             aria-label="Close sidebar"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <div className="relative w-6 h-6 flex items-center justify-center overflow-hidden">
+              <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out group-hover:rotate-[225deg] rotate-45"></span>
+              <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out group-hover:-rotate-[225deg] -rotate-45"></span>
+            </div>
           </button>
           <div className="flex-1 flex flex-col gap-4 pt-8">
             <HeaderLink href="/" className="text-lg" onClick={() => setOpen(false)}>Home</HeaderLink>

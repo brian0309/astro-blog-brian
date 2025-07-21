@@ -14,7 +14,7 @@
 	--black: 51, 51, 51;
 	--gray: 119, 119, 119;
 	--gray-light: 243, 243, 243;
-	--gray-dark: 34, 41, 57;
+	--gray-dark: 31, 41, 55; /* Updated to match tailwind's gray-900 */
 	--paper: 255, 252, 249;
 	--paper-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	--paper-texture: repeating-linear-gradient(
