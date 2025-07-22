@@ -61,45 +61,6 @@ html.dark body {
 	color: rgb(var(--paper));
 }
 
-main {
-	width: 1080px;
-	max-width: calc(100% - 2em);
-	margin: 2em auto;
-	padding: 3em 2em;
-	background: white;
-	box-shadow: var(--paper-shadow);
-	border-radius: 2px;
-	position: relative;
-	transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-html.dark main {
-	background: rgb(var(--black));
-	box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-}
-
-main::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: var(--paper-texture);
-	pointer-events: none;
-	opacity: 0.5;
-	border-radius: 2px;
-}
-
-html.dark main::before {
-	background: repeating-linear-gradient(
-		45deg,
-		rgba(0, 0, 0, 0.1),
-		rgba(0, 0, 0, 0.1) 1px,
-		transparent 1px,
-		transparent 3px
-	);
-}
 
 h1,
 h2,
@@ -256,9 +217,5 @@ hr {
 @media (max-width: 720px) {
 	body {
 		font-size: 16px;
-	}
-	main {
-		padding: 1.5em;
-		margin: 1em auto;
 	}
 }
