@@ -1,25 +1,11 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/common/Header.astro';
-import Footer from '../components/common/Footer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import HoverEffects from '../components/effects/HoverEffects';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<script is:inline>
-			const theme = localStorage.getItem('theme');
-			if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-				document.documentElement.classList.add('dark');
-			}
-		</script>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<HoverEffects client:load />
-		<Header />
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<HoverEffects client:load slot="effects" />
 		<main>
 			<h1>🧑‍🚀 Hello, Astronaut!</h1>
 			<p>
@@ -52,7 +38,5 @@ import HoverEffects from '../components/effects/HoverEffects';
 					>astro-blog-template
 				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+	</main>
+</BaseLayout>
