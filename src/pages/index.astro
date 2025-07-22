@@ -6,37 +6,26 @@ import HoverEffects from '../components/effects/HoverEffects';
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<HoverEffects client:load slot="effects" />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+	<main class="h-[75vh] flex items-center justify-center px-4 relative">
+		<div class="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-5">
+			<div class="md:w-1/2">
+				<p class="text-lightGray text-base uppercase tracking-widest mb-4">HEY THERE!</p>
+				<h1 class="text-primary text-7xl font-bold uppercase mb-4 leading-tight">I AM BRIAN</h1>
+				<p class="text-softGray text-xl uppercase tracking-wider mb-8">Tech Generalist Freelancer</p>
+				<button class="bg-blue-pink-gradient text-white px-6 py-3 rounded-md uppercase font-medium tracking-wider">
+					SEE MY WORK
+				</button>
+				<div class="flex gap-3 mt-12">
+					<!-- Social icons would go here -->
+				</div>
+			</div>
+			<div class="md:w-1/2">
+				<img 
+					src="/blog-placeholder-1.jpg" 
+					alt="Jo Breed" 
+					class="w-full h-auto rounded-lg shadow-xl"
+				/>
+			</div>
+		</div>
 	</main>
 </BaseLayout>
