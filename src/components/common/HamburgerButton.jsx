@@ -37,9 +37,9 @@ export default function HamburgerButton() {
         ) : (
           // Hamburger state
           <>
-            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out -translate-y-1.5 group-hover:translate-y-0 group-hover:rotate-45"></span>
-            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out group-hover:opacity-0"></span>
-            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out translate-y-1.5 group-hover:translate-y-0 group-hover:-rotate-45"></span>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out -translate-y-1.5"></span>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out"></span>
+            <span className="absolute w-5 h-0.5 bg-current transform transition-all duration-300 ease-in-out translate-y-1.5"></span>
           </>
         )}
       </div>
