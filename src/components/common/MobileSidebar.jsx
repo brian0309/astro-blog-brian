@@ -100,7 +100,12 @@ export default function MobileSidebar() {
             </div>
           </div>
           <div className="pb-10 flex justify-center">
-            <ThemeToggle />
+            <ThemeToggle onClick={() => {
+              setOpen(false);
+              window.dispatchEvent(new CustomEvent('sidebar-closed', {
+                detail: { type: 'sidebar-closed' }
+              }));
+            }} />
           </div>
         </div>
       </aside>

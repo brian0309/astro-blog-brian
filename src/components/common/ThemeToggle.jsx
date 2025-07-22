@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ onClick }) => {
   const [theme, setThemeState] = useState('light'); // 'light' or 'dark'
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const ThemeToggle = () => {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('theme', 'light');
       }
-      setThemeState(newTheme);
+    setThemeState(newTheme);
     };
 
     // Check for saved theme in localStorage or system preference
@@ -37,6 +37,7 @@ const ThemeToggle = () => {
       localStorage.setItem('theme', 'light');
     }
     setThemeState(newTheme);
+    onClick?.();
   };
 
   return (
