@@ -11,7 +11,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 <BaseLayout title={title} description={description}>
 	<MobileSidebar client:load />
-	<main slot="" class="w-[calc(100%-2em)] max-w-[1080px] mx-auto">
+	<main class="w-[calc(100%-2em)] max-w-[1080px] mx-auto">
 		<article class="w-full">
 			{heroImage && (
 				<div class="w-full">
