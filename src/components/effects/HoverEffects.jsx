@@ -3,14 +3,31 @@ import React, { useState, useEffect, useRef } from 'react';
 const HoverEffects = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [circles, setCircles] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
   const animationFrameRef = useRef();
   const containerRef = useRef();
+
+  // Handle window resize for responsive behavior
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set initial state
+    handleResize();
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Initialize circles with random positions and velocities
   useEffect(() => {
     const initializeCircles = () => {
       const newCircles = [];
-      const sizes = [300, 200, 200]; // Different sizes for the 3 moving circles
+      const sizeMultiplier = isMobile ? 0.5 : 1; // 2x smaller on mobile
+      
+      const baseSizes = [300, 200, 200]; // Base sizes for desktop
+      const sizes = baseSizes.map(size => size * sizeMultiplier); // Apply mobile scaling
       const colors = ['bg-purple-500/50', 'bg-pink-500/50', 'bg-cyan-500/50']; // Increased opacity from /30 to /50
       
       for (let i = 0; i < 3; i++) {
@@ -53,7 +70,7 @@ const HoverEffects = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [isMobile]); // Re-initialize when mobile state changes
 
   // Handle mouse movement
   useEffect(() => {
@@ -192,29 +209,37 @@ const HoverEffects = () => {
     <div ref={containerRef} className="fixed inset-0 pointer-events-none" style={{ zIndex: -1 }}>
       {/* Original mouse-following circle */}
       <div
-        className="absolute w-[300px] h-[300px] rounded-full bg-blue-500/30 transition-transform duration-100 ease-out"
+        className="absolute rounded-full bg-blue-500/30 transition-transform duration-100 ease-out"
         style={{
-          transform: `translate(${mousePosition.x - 150}px, ${mousePosition.y - 150}px)`,
-          filter: 'blur(150px)',
+          width: isMobile ? '150px' : '300px', // 2x smaller on mobile
+          height: isMobile ? '150px' : '300px',
+          transform: `translate(${mousePosition.x - (isMobile ? 75 : 150)}px, ${mousePosition.y - (isMobile ? 75 : 150)}px)`,
+          filter: `blur(${isMobile ? 75 : 150}px)`, // Proportional blur
           willChange: 'transform',
         }}
       />
       
       {/* Moving circles with different sizes */}
-      {circles.map(circle => (
-        <div
-          key={circle.id}
-          className={`absolute rounded-full transition-all duration-200 ease-out ${circle.baseColor}`}
-          style={{
-            width: `${circle.size}px`,
-            height: `${circle.size}px`,
-            transform: `translate(${circle.x - circle.radius}px, ${circle.y - circle.radius}px) scale(${1 + circle.reactionIntensity * 0.3})`,
-            filter: `blur(${Math.max(80, (circle.size / 3)) + circle.reactionIntensity * 50}px)`, // Reduced blur for better visibility
-            opacity: 0.5 + circle.reactionIntensity * 0.4, // Increased base opacity from 0.3 to 0.5
-            willChange: 'transform, filter, opacity',
-          }}
-        />
-      ))}
+      {circles.map(circle => {
+        const mobileBlurBase = Math.max(40, (circle.size / 3)); // Smaller base blur for mobile
+        const desktopBlurBase = Math.max(80, (circle.size / 3));
+        const blurBase = isMobile ? mobileBlurBase : desktopBlurBase;
+        
+        return (
+          <div
+            key={circle.id}
+            className={`absolute rounded-full transition-all duration-200 ease-out ${circle.baseColor}`}
+            style={{
+              width: `${circle.size}px`,
+              height: `${circle.size}px`,
+              transform: `translate(${circle.x - circle.radius}px, ${circle.y - circle.radius}px) scale(${1 + circle.reactionIntensity * 0.3})`,
+              filter: `blur(${blurBase + circle.reactionIntensity * 50}px)`,
+              opacity: 0.5 + circle.reactionIntensity * 0.4,
+              willChange: 'transform, filter, opacity',
+            }}
+          />
+        );
+      })}
     </div>
   );
 };
