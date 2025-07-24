@@ -21,7 +21,7 @@ const HoverEffects = () => {
           id: i,
           x: Math.random() * (window.innerWidth - size) + radius,
           y: Math.random() * (window.innerHeight - size) + radius,
-          vx: (Math.random() - 0.5) * 4, // Increased velocity range from 2 to 4
+          vx: (Math.random() - 0.5) * 4, // Initial random direction
           vy: (Math.random() - 0.5) * 4,
           size: size,
           radius: radius,
@@ -30,7 +30,17 @@ const HoverEffects = () => {
           reactionIntensity: 0,
         });
       }
-      setCircles(newCircles);
+      
+      // Normalize initial velocities to constant speed
+      setCircles(newCircles.map(circle => {
+        const currentSpeed = Math.sqrt(circle.vx * circle.vx + circle.vy * circle.vy);
+        const targetSpeed = 2;
+        return {
+          ...circle,
+          vx: (circle.vx / currentSpeed) * targetSpeed,
+          vy: (circle.vy / currentSpeed) * targetSpeed,
+        };
+      }));
     };
 
     initializeCircles();
@@ -62,7 +72,7 @@ const HoverEffects = () => {
   useEffect(() => {
     const animate = () => {
       setCircles(prevCircles => {
-        return prevCircles.map(circle => {
+        return prevCircles.map((circle, index) => {
           // Update position
           let newX = circle.x + circle.vx;
           let newY = circle.y + circle.vy;
@@ -83,36 +93,74 @@ const HoverEffects = () => {
             Math.pow(mousePosition.x - newX, 2) + Math.pow(mousePosition.y - newY, 2)
           );
 
-          // Chain reaction when mouse is within 200px
-          const isReacting = distanceToMouse < 200;
-          const reactionIntensity = isReacting ? Math.max(0, 1 - distanceToMouse / 200) : 0;
+          // Mouse chain reaction when within 200px
+          const isReactingToMouse = distanceToMouse < 200;
+          const mouseReactionIntensity = isReactingToMouse ? Math.max(0, 1 - distanceToMouse / 200) : 0;
 
-          // Apply repulsion force when reacting
-          if (isReacting) {
-            const angle = Math.atan2(newY - mousePosition.y, newX - mousePosition.x);
-            const force = reactionIntensity * 0.5;
-            circle.vx += Math.cos(angle) * force;
-            circle.vy += Math.sin(angle) * force;
+          // Check distance to other circles for inter-circle chain reactions
+          let maxCircleReactionIntensity = 0;
+          let totalCircleForceX = 0;
+          let totalCircleForceY = 0;
+
+          prevCircles.forEach((otherCircle, otherIndex) => {
+            if (index !== otherIndex) {
+              const distanceToOther = Math.sqrt(
+                Math.pow(otherCircle.x - newX, 2) + Math.pow(otherCircle.y - newY, 2)
+              );
+
+              // Chain reaction when circles are within 250px of each other
+              const reactionDistance = 250;
+              if (distanceToOther < reactionDistance) {
+                const circleReactionIntensity = Math.max(0, 1 - distanceToOther / reactionDistance);
+                maxCircleReactionIntensity = Math.max(maxCircleReactionIntensity, circleReactionIntensity);
+
+                // Apply repulsion force from other circle
+                const angle = Math.atan2(newY - otherCircle.y, newX - otherCircle.x);
+                const force = circleReactionIntensity * 0.3; // Gentler force between circles
+                totalCircleForceX += Math.cos(angle) * force;
+                totalCircleForceY += Math.sin(angle) * force;
+              }
+            }
+          });
+
+          // Combine mouse and circle reaction intensities
+          const totalReactionIntensity = Math.max(mouseReactionIntensity, maxCircleReactionIntensity);
+
+          // Apply forces
+          if (isReactingToMouse || maxCircleReactionIntensity > 0) {
+            // Mouse repulsion force
+            if (isReactingToMouse) {
+              const mouseAngle = Math.atan2(newY - mousePosition.y, newX - mousePosition.x);
+              const mouseForce = mouseReactionIntensity * 0.5;
+              circle.vx += Math.cos(mouseAngle) * mouseForce;
+              circle.vy += Math.sin(mouseAngle) * mouseForce;
+            }
+
+            // Circle-to-circle repulsion forces
+            circle.vx += totalCircleForceX;
+            circle.vy += totalCircleForceY;
             
             // Limit velocity
-            const maxVelocity = 5; // Increased from 3 to 5 for more dynamic movement
+            const maxVelocity = 5;
             const currentSpeed = Math.sqrt(circle.vx * circle.vx + circle.vy * circle.vy);
             if (currentSpeed > maxVelocity) {
               circle.vx = (circle.vx / currentSpeed) * maxVelocity;
               circle.vy = (circle.vy / currentSpeed) * maxVelocity;
             }
           } else {
-            // Maintain constant movement - reduce friction
-            circle.vx *= 0.995; // Reduced friction from 0.99 to 0.995
-            circle.vy *= 0.995;
-            
-            // Higher minimum movement to ensure constant motion
-            const minSpeed = 1.5; // Increased from 0.5 to 1.5
+            // Maintain absolutely constant speed - no friction at all
             const currentSpeed = Math.sqrt(circle.vx * circle.vx + circle.vy * circle.vy);
-            if (currentSpeed < minSpeed) {
+            const targetSpeed = 2; // Constant speed for all circles
+            
+            // Normalize velocity to maintain constant speed
+            if (currentSpeed > 0) {
+              circle.vx = (circle.vx / currentSpeed) * targetSpeed;
+              circle.vy = (circle.vy / currentSpeed) * targetSpeed;
+            } else {
+              // If somehow stopped, give it a random direction at target speed
               const angle = Math.random() * Math.PI * 2;
-              circle.vx = Math.cos(angle) * minSpeed;
-              circle.vy = Math.sin(angle) * minSpeed;
+              circle.vx = Math.cos(angle) * targetSpeed;
+              circle.vy = Math.sin(angle) * targetSpeed;
             }
           }
 
@@ -120,8 +168,8 @@ const HoverEffects = () => {
             ...circle,
             x: newX,
             y: newY,
-            isReacting,
-            reactionIntensity,
+            isReacting: totalReactionIntensity > 0,
+            reactionIntensity: totalReactionIntensity,
           };
         });
       });
