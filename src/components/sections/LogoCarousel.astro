@@ -23,10 +23,20 @@ const allLogos = [...logos, ...logos]; // Duplicate for seamless loop
     <div class="logo-carousel-container relative overflow-hidden">
       <div class="animate-scroll flex">
         {allLogos.map((logo) => (
-          <div class="flex-shrink-0 mx-8 logo-item">
-            <div class="text-4xl text-gray-400 dark:text-gray-500 font-semibold">
-              {logo}
-            </div>
+          <div class="flex-shrink-0 mx-8 logo-item" aria-label={logo}>
+            {logo === "Astro" ? (
+              <img
+                src="/logos/astro-logo-light-gradient.png"
+                alt="Astro logo"
+                class="h-12 w-auto mx-auto"
+                loading="lazy"
+                style="max-width:72px;"
+              />
+            ) : (
+              <div class="text-4xl text-gray-400 dark:text-gray-500 font-semibold">
+                {logo}
+              </div>
+            )}
           </div>
         ))}
       </div>
