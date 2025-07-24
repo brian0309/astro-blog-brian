@@ -1,0 +1,72 @@
+---
+// No props needed for this static component yet
+const logos = [
+  "React",
+  "Astro",
+  "Node.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "JavaScript",
+  "Next.js",
+  "Vue.js",
+];
+const allLogos = [...logos, ...logos]; // Duplicate for seamless loop
+---
+
+<div class="relative w-full overflow-hidden py-12">
+  <div class="container mx-auto relative">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">Technologies and frameworks I work with</h2>
+    </div>
+    
+    <div class="logo-carousel-container relative overflow-hidden">
+      <div class="animate-scroll flex">
+        {allLogos.map((logo) => (
+          <div class="flex-shrink-0 mx-8 logo-item">
+            <div class="text-4xl text-gray-400 dark:text-gray-500 font-semibold">
+              {logo}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  .logo-carousel-container {
+    position: relative;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+  }
+
+  .logo-item {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
