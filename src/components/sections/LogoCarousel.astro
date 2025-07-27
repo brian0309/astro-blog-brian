@@ -21,7 +21,7 @@ const allLogos = [...logos, ...logos]; // Duplicate for seamless loop
     </div>
     
     <div class="logo-carousel-container relative overflow-hidden">
-      <div class="animate-scroll flex">
+      <div class="animate-scroll flex w-max">
         {allLogos.map((logo) => (
           <div class="flex-shrink-0 mx-8 logo-item">
             <div class="text-4xl text-gray-400 dark:text-gray-500 font-semibold">
@@ -35,17 +35,19 @@ const allLogos = [...logos, ...logos]; // Duplicate for seamless loop
 </div>
 
 <style>
+
   @keyframes scroll {
-    from {
+    0% {
       transform: translateX(0);
     }
-    to {
+    100% {
       transform: translateX(-50%);
     }
   }
 
   .animate-scroll {
     animation: scroll 30s linear infinite;
+    will-change: transform;
   }
 
   .logo-carousel-container {
