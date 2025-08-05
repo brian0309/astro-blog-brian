@@ -14,10 +14,28 @@ const { title, description } = Astro.props;
 <html lang="en">
   <head>
     <script is:inline>
-      const theme = localStorage.getItem('theme');
-      if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-      }
+      // Prevent initial wrong icon/FOUC by setting theme class before CSS loads.
+      (function () {
+        try {
+          const ls = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const shouldDark = ls ? ls === 'dark' : prefersDark;
+          const root = document.documentElement;
+          if (shouldDark) {
+            root.classList.add('dark');
+          } else {
+            root.classList.remove('dark');
+          }
+          // Optional: suppress transitions on first paint to avoid flicker
+          root.classList.add('no-theme-transition');
+          // Remove suppression after first frame
+          window.requestAnimationFrame(() => {
+            root.classList.remove('no-theme-transition');
+          });
+        } catch (_) {
+          // no-op
+        }
+      })();
     </script>
     <BaseHead title={title} description={description} />
     <slot name="head" />

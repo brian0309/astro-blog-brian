@@ -1,39 +1,32 @@
 import React, { useState, useEffect } from 'react';
 
 const ThemeToggle = ({ onClick }) => {
-  const [theme, setThemeState] = useState('light'); // 'light' or 'dark'
+  // null = unknown until mounted; 'light' | 'dark' once known
+  const [theme, setTheme] = useState(null);
 
-  // Apply theme to DOM and persist
   const applyTheme = (newTheme) => {
+    const root = document.documentElement;
     if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
-    setThemeState(newTheme);
+    setTheme(newTheme);
   };
 
   useEffect(() => {
-    // Initialize theme from storage or system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      applyTheme('dark');
-    } else {
-      applyTheme('light');
-    }
+    // Determine initial theme from existing html class (set by BaseLayout pre-hydration script)
+    const rootIsDark = document.documentElement.classList.contains('dark');
+    applyTheme(rootIsDark ? 'dark' : 'light');
 
-    // Handler for storage changes (e.g., other tabs or other components writing to localStorage)
     const handleStorage = (e) => {
       if (e.key === 'theme' && (e.newValue === 'light' || e.newValue === 'dark')) {
         applyTheme(e.newValue);
       }
     };
 
-    // Handler for in-tab sync via custom event
     const handleThemeChangeEvent = (e) => {
       const newTheme = e?.detail?.theme;
       if (newTheme === 'light' || newTheme === 'dark') {
@@ -53,12 +46,23 @@ const ThemeToggle = ({ onClick }) => {
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     applyTheme(newTheme);
-
-    // Dispatch custom event for same-tab components
     window.dispatchEvent(new CustomEvent('theme-change', { detail: { theme: newTheme } }));
-
     onClick?.();
   };
+
+  // Render a minimal, non-flashing placeholder until mounted to avoid incorrect initial icon.
+  if (theme === null) {
+    return (
+      <button
+        id="theme-toggle"
+        className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        aria-label="Toggle dark mode"
+        disabled
+      >
+        <span className="block w-6 h-6" />
+      </button>
+    );
+  }
 
   return (
     <button
