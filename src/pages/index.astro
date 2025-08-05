@@ -4,6 +4,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import HoverEffects from '../components/effects/HoverEffects';
 import LogoCarousel from '../components/sections/LogoCarousel.astro';
 import Separator from '../components/common/Separator.astro';
+import BentoBox from '../components/sections/BentoBox.astro';
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -34,4 +35,5 @@ import Separator from '../components/common/Separator.astro';
 </main>
 	   <LogoCarousel />
    <Separator />
-</BaseLayout>
+   <BentoBox heading="Capabilities" />
+ </BaseLayout>

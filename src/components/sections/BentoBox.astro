@@ -1,0 +1,102 @@
+---
+interface Props {
+  heading?: string;
+  subheading?: string;
+}
+const { heading = "Capabilities", subheading } = Astro.props as Props;
+---
+
+<section class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+  {heading && (
+    <header class="mb-8">
+      <h2 class="text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl">
+        {heading}
+      </h2>
+      {subheading && (
+        <p class="mt-2 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">
+          {subheading}
+        </p>
+      )}
+    </header>
+  )}
+
+  <!-- Bento mosaic -->
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-6 lg:grid-cols-12 [grid-auto-rows:120px] md:[grid-auto-rows:140px] lg:[grid-auto-rows:150px]">
+    <!-- A: Large keyboard tile -->
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner ring-1 ring-black/5 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:bg-neutral-900/60 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-8 lg:row-span-2">
+      <div class="aspect-[16/9] overflow-hidden rounded-xl bg-black/5">
+        <img
+          src="https://placehold.co/960x540/png?text=Keyboard"
+          alt="Keyboard placeholder"
+          class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+      </div>
+      <h3 class="mt-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        Built for your keyboard
+      </h3>
+      <p class="mt-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a orci eget tortor ultrices dictum. Praesent ut risus id nisl fermentum finibus.
+      </p>
+    </article>
+
+    <!-- B: Small tall fast tile -->
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner ring-1 ring-black/5 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:bg-neutral-900/60 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-4 lg:row-span-2">
+      <div class="flex h-full flex-col items-center justify-center">
+        <img
+          src="https://placehold.co/360x480/png?text=4"
+          alt="Speed numeral placeholder"
+          class="h-36 w-36 rounded-lg object-contain opacity-90"
+          loading="lazy"
+        />
+        <h3 class="mt-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">Breathtakingly fast</h3>
+        <p class="mt-1 text-center text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pharetra massa non sollicitudin.
+        </p>
+      </div>
+    </article>
+
+    <!-- C: Medium square teams tile -->
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner ring-1 ring-black/5 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:bg-neutral-900/60 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-6 lg:row-span-2">
+      <div class="grid h-full grid-cols-1 items-center gap-4 lg:grid-cols-2">
+        <div class="overflow-hidden rounded-xl bg-black/5">
+          <img
+            src="https://placehold.co/540x540/png?text=Teams+Art"
+            alt="Teams placeholder"
+            class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+            Designed for modern software teams
+          </h3>
+          <p class="mt-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- D: Medium wide command line tile with mock input -->
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner ring-1 ring-black/5 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:bg-neutral-900/60 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-6 lg:row-span-2">
+      <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Meet your command line</h3>
+      <p class="mt-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempor lectus id mattis pharetra.
+      </p>
+      <!-- Palette mock -->
+      <div class="mt-4 rounded-xl border border-white/10 bg-white/5 p-4 ring-1 ring-black/5 dark:bg-neutral-900/50">
+        <div class="mb-3 flex items-center gap-2 rounded-md bg-black/5 px-3 py-2 dark:bg-white/5">
+          <span class="text-xs text-neutral-500">⌘K</span>
+          <span class="text-sm text-neutral-500">Type a command or search…</span>
+        </div>
+        <ul class="space-y-2 text-sm text-neutral-500">
+          <li class="rounded-md bg-black/5 px-3 py-2 dark:bg-white/5">Assign to…</li>
+          <li class="rounded-md bg-black/5 px-3 py-2 dark:bg-white/5">Change status…</li>
+          <li class="rounded-md bg-black/5 px-3 py-2 dark:bg-white/5">Change priority…</li>
+          <li class="rounded-md bg-black/5 px-3 py-2 dark:bg-white/5">Add labels…</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>

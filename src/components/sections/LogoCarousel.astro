@@ -32,6 +32,14 @@ const allLogos = [...logos, ...logos]; // Duplicate for seamless loop
                 loading="lazy"
                 style="max-width:72px;"
               />
+            ) : logo === "Tailwind CSS" ? (
+              <img
+                src="/logos/tailwind-css-logo.svg"
+                alt="Tailwind CSS logo"
+                class="h-12 w-auto mx-auto"
+                loading="lazy"
+                style="min-width:100px;"
+              />
             ) : (
               <div class="text-4xl text-gray-400 dark:text-gray-500 font-semibold">
                 {logo}
