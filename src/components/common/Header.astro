@@ -17,12 +17,13 @@ import GlassHeader from './GlassHeader.jsx';
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
-<div class="md:hidden">
+<div class="md:hidden flex items-center gap-2">
+  <ThemeToggle client:load onClick={() => {}} />
   <HamburgerButton client:load />
 </div>
 <MobileSidebar client:load />
 		<div class="social-links hidden md:flex items-center">
-			<ThemeToggle client:load />
+			<ThemeToggle client:load onClick={() => {}} />
 		</div>
 	</nav>
 </GlassHeader>

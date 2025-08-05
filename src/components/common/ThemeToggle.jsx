@@ -3,32 +3,8 @@ import React, { useState, useEffect } from 'react';
 const ThemeToggle = ({ onClick }) => {
   const [theme, setThemeState] = useState('light'); // 'light' or 'dark'
 
-  useEffect(() => {
-    // Function to set the theme
-    const applyTheme = (newTheme) => {
-      if (newTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
-    setThemeState(newTheme);
-    };
-
-    // Check for saved theme in localStorage or system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      applyTheme('dark');
-    } else {
-      applyTheme('light');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
+  // Apply theme to DOM and persist
+  const applyTheme = (newTheme) => {
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -37,6 +13,50 @@ const ThemeToggle = ({ onClick }) => {
       localStorage.setItem('theme', 'light');
     }
     setThemeState(newTheme);
+  };
+
+  useEffect(() => {
+    // Initialize theme from storage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      applyTheme('dark');
+    } else {
+      applyTheme('light');
+    }
+
+    // Handler for storage changes (e.g., other tabs or other components writing to localStorage)
+    const handleStorage = (e) => {
+      if (e.key === 'theme' && (e.newValue === 'light' || e.newValue === 'dark')) {
+        applyTheme(e.newValue);
+      }
+    };
+
+    // Handler for in-tab sync via custom event
+    const handleThemeChangeEvent = (e) => {
+      const newTheme = e?.detail?.theme;
+      if (newTheme === 'light' || newTheme === 'dark') {
+        applyTheme(newTheme);
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+    window.addEventListener('theme-change', handleThemeChangeEvent);
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('theme-change', handleThemeChangeEvent);
+    };
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+
+    // Dispatch custom event for same-tab components
+    window.dispatchEvent(new CustomEvent('theme-change', { detail: { theme: newTheme } }));
+
     onClick?.();
   };
 
@@ -45,6 +65,7 @@ const ThemeToggle = ({ onClick }) => {
       id="theme-toggle"
       className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
       onClick={toggleTheme}
+      aria-label="Toggle dark mode"
     >
       <svg
         id="sun-icon"
