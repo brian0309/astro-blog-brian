@@ -6,7 +6,8 @@ interface Props {
 const { heading = "Capabilities", subheading } = Astro.props as Props;
 ---
 
-<section class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+<section class="px-4 sm:px-6 md:px-8">
+  <div class="w-full max-w-[1440px] mx-auto py-16">
   {heading && (
     <header class="mb-8">
       <h2 class="text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl">
@@ -99,4 +100,5 @@ const { heading = "Capabilities", subheading } = Astro.props as Props;
       </div>
     </article>
   </div>
+</div>
 </section>
