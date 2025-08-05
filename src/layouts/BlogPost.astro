@@ -2,7 +2,6 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import MobileSidebar from '../components/common/MobileSidebar.jsx';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -10,7 +9,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-	<MobileSidebar client:load />
 	<main class="w-[calc(100%-2em)] max-w-[1080px] mx-auto">
 		<article class="w-full">
 			{heroImage && (
