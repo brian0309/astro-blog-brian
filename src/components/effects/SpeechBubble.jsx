@@ -10,8 +10,8 @@ export default function SpeechBubble() {
         src="/images/homepage/man-with-pc-stickman.svg" 
         alt="Brian hehe" 
         draggable="false"
-        ondragstart="return false"
-        onmousedown="return false"
+        onDragStart={() => false}
+        onMouseDown={() => false}
         style={{WebkitUserDrag: 'none', userDrag: 'none'}}
         className="w-full max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl h-auto rounded-lg shadow-none select-none pointer-events-auto dark:invert dark:brightness-80 dark:opacity-90 cursor-pointer transition-transform duration-300 hover:scale-105"
         onMouseEnter={() => setIsVisible(true)}
