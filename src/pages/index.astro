@@ -10,10 +10,10 @@ import BentoBox from '../components/sections/BentoBox.astro';
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<HoverEffects client:load slot="effects" />
-<main class="min-h-[60vh] md:h-[70vh] flex items-start md:items-center px-4 pt-8 sm:px-6 md:px-8 relative">
+<main class="min-h-[60vh] md:h-[70vh] flex items-start md:items-center relative px-4 sm:px-6 lg:px-8 py-10 md:py-16">
   <div class="w-full max-w-[1440px] mx-auto">
-	<div class="w-full flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-5 pt-4 sm:pt-6 md:pt-0">
-			<div class="w-full md:w-1/2 pl-0 sm:pl-1 md:pl-0">
+	<div class="w-full flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-5">
+			<div class="w-full md:w-1/2">
 				<p class="text-lightGray text-lg sm:text-xl uppercase tracking-widest mb-4">HEY THERE!</p>
 				<h1 class="text-primary text-5xl sm:text-6xl font-bold uppercase mb-2 leading-snug md:text-7xl">I AM BRIAN</h1>
 				<p class="text-softGray text-2xl sm:text-3xl uppercase tracking-wider mb-8 mt-0">Your Techy Freelancer</p>
@@ -28,6 +28,5 @@ import BentoBox from '../components/sections/BentoBox.astro';
   </div>
 </main>
 	   <LogoCarousel />
-   <Separator />
    <BentoBox heading="Capabilities" />
  </BaseLayout>
