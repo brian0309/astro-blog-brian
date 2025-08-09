@@ -73,7 +73,7 @@ const ThemeToggle = ({ onClick }) => {
     >
       <svg
         id="sun-icon"
-        className={`w-6 h-6 text-gray-800 dark:text-gray-200 ${theme === 'dark' ? 'hidden' : ''}`}
+        className={`w-6 h-6 text-main ${theme === 'dark' ? 'hidden' : ''}`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -88,7 +88,7 @@ const ThemeToggle = ({ onClick }) => {
       </svg>
       <svg
         id="moon-icon"
-        className={`w-6 h-6 text-gray-800 dark:text-gray-200 ${theme === 'light' ? 'hidden' : ''}`}
+        className={`w-6 h-6 text-main ${theme === 'light' ? 'hidden' : ''}`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

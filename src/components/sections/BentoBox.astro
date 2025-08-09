@@ -10,11 +10,11 @@ const { heading = "Capabilities", subheading } = Astro.props as Props;
   <div class="w-full max-w-[1440px] mx-auto py-16">
   {heading && (
     <header class="mb-8">
-      <h2 class="text-balance text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-3xl">
+      <h2 class="text-balance text-2xl font-semibold tracking-tight text-main sm:text-3xl">
         {heading}
       </h2>
       {subheading && (
-        <p class="mt-2 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">
+        <p class="mt-2 max-w-2xl text-pretty text-secondary">
           {subheading}
         </p>
       )}
@@ -24,12 +24,12 @@ const { heading = "Capabilities", subheading } = Astro.props as Props;
   <!-- Bento mosaic -->
   <div class="grid grid-cols-1 gap-6 md:grid-cols-6 lg:grid-cols-12 [grid-auto-rows:400px] md:[grid-auto-rows:180px] lg:[grid-auto-rows:180px]">
     <!-- A: Large keyboard tile --> 
-    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-black/10 bg-white/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:border-white/10 dark:bg-gray-900/50 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-8 lg:row-span-2">
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-main bg-main/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 md:col-span-6 md:row-span-2 lg:col-span-8 lg:row-span-2">
       <div class="aspect-[16/9] overflow-hidden rounded-xl bg-black/5 dark:bg-white/5">
         <img
           src="/images/computer-guy-light.png"
           alt="Developer at computer (light)"
-          class="h-full w-full object-cover md:object-contain lg:object-contain transition duration-300 group-hover:scale-[1.02] dark:hidden"
+          class="icon-light h-full w-full object-cover md:object-contain lg:object-contain transition duration-300 group-hover:scale-[1.02]"
           loading="lazy"
           width="960"
           height="540"
@@ -37,22 +37,22 @@ const { heading = "Capabilities", subheading } = Astro.props as Props;
         <img
           src="/images/computer-guy-dark.png"
           alt="Developer at computer (dark)"
-          class="hidden h-full w-full object-cover md:object-contain lg:object-contain transition duration-300 group-hover:scale-[1.02] dark:block"
+          class="icon-dark h-full w-full object-cover md:object-contain lg:object-contain transition duration-300 group-hover:scale-[1.02]"
           loading="lazy"
           width="960"
           height="540"
         />
       </div>
-      <h3 class="mt-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+      <h3 class="mt-4 text-lg font-semibold text-main">
         Code that doesn't break at 3 AM
       </h3>
-      <p class="mt-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+      <p class="mt-1 text-sm leading-6 text-secondary">
         From debugging mysterious production issues to crafting elegant solutions, I write code that's maintainable, scalable, and won't make future me cry.
       </p>
     </article>
 
     <!-- B: Small tall fast tile -->
-    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-black/10 bg-white/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:border-white/10 dark:bg-gray-900/50 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-4 lg:row-span-2">
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-main bg-main/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 md:col-span-6 md:row-span-2 lg:col-span-4 lg:row-span-2">
       <div class="flex h-full flex-col items-center justify-center">
         <img
           src="https://placehold.co/360x480/png?text=4"
@@ -60,15 +60,15 @@ const { heading = "Capabilities", subheading } = Astro.props as Props;
           class="h-36 w-36 rounded-lg object-contain opacity-90"
           loading="lazy"
         />
-        <h3 class="mt-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">SEO wizardry</h3>
-        <p class="mt-1 text-center text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+        <h3 class="mt-4 text-lg font-semibold text-main">SEO wizardry</h3>
+        <p class="mt-1 text-center text-sm leading-6 text-secondary">
           Making websites appear at the top of Google searches like magic. Keywords, meta tags, and schema markup are my spells of choice.
         </p>
       </div>
     </article>
 
     <!-- C: Medium square teams tile -->
-    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-black/10 bg-white/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:border-white/10 dark:bg-gray-900/50 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-6 lg:row-span-2">
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-main bg-main/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 md:col-span-6 md:row-span-2 lg:col-span-6 lg:row-span-2">
       <div class="grid h-full grid-cols-1 items-center gap-4 lg:grid-cols-2">
         <div class="overflow-hidden rounded-xl bg-black/5">
           <img
@@ -79,10 +79,10 @@ const { heading = "Capabilities", subheading } = Astro.props as Props;
           />
         </div>
         <div>
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+          <h3 class="text-lg font-semibold text-main">
             Email inbox zero warrior
           </h3>
-          <p class="mt-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+          <p class="mt-1 text-sm leading-6 text-secondary">
             Conquering overflowing inboxes with automated workflows, smart filters, and the ancient art of actually replying to emails on time.
           </p>
         </div>
@@ -90,22 +90,22 @@ const { heading = "Capabilities", subheading } = Astro.props as Props;
     </article>
 
     <!-- D: Medium wide command line tile with mock input -->
-    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-black/10 bg-white/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 dark:border-white/10 dark:bg-gray-900/50 dark:ring-white/5 md:col-span-6 md:row-span-2 lg:col-span-6 lg:row-span-2">
-      <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Admin tasks on autopilot</h3>
-      <p class="mt-1 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+    <article class="group relative col-span-1 row-span-1 overflow-hidden rounded-2xl border border-main bg-main/50 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:ring-indigo-400/30 md:col-span-6 md:row-span-2 lg:col-span-6 lg:row-span-2">
+      <h3 class="text-lg font-semibold text-main">Admin tasks on autopilot</h3>
+      <p class="mt-1 text-sm leading-6 text-secondary">
         Turning boring administrative work into streamlined processes. Because life's too short for manual data entry and endless spreadsheets.
       </p>
       <!-- Palette mock -->
-      <div class="mt-4 rounded-xl border border-black/10 bg-white p-4 ring-1 ring-black/5 dark:border-white/10 dark:bg-gray-900/50">
-        <div class="mb-3 flex items-center gap-2 rounded-md bg-white px-3 py-2 dark:bg-gray-900">
-          <span class="text-xs text-neutral-600 dark:text-neutral-400">⌘K</span>
-          <span class="text-sm text-neutral-600 dark:text-neutral-400">Automate boring tasks…</span>
+      <div class="mt-4 rounded-xl border border-main bg-main p-4 ring-1 ring-black/5">
+        <div class="mb-3 flex items-center gap-2 rounded-md bg-main px-3 py-2">
+          <span class="text-xs text-secondary">⌘K</span>
+          <span class="text-sm text-secondary">Automate boring tasks…</span>
         </div>
-        <ul class="space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
-          <li class="rounded-md border border-black/5 bg-black/5 px-3 py-2 dark:border-white/5 dark:bg-white/5">Automate invoice processing</li>
-          <li class="rounded-md border border-black/5 bg-black/5 px-3 py-2 dark:border-white/5 dark:bg-white/5">Schedule social media posts</li>
-          <li class="rounded-md border border-black/5 bg-black/5 px-3 py-2 dark:border-white/5 dark:bg-white/5">Generate SEO reports</li>
-          <li class="rounded-md border border-black/5 bg-black/5 px-3 py-2 dark:border-white/5 dark:bg-white/5">Send follow-up emails</li>
+        <ul class="space-y-2 text-sm text-secondary">
+          <li class="rounded-md border border-main bg-black/5 px-3 py-2 dark:bg-white/5">Automate invoice processing</li>
+          <li class="rounded-md border border-main bg-black/5 px-3 py-2 dark:bg-white/5">Schedule social media posts</li>
+          <li class="rounded-md border border-main bg-black/5 px-3 py-2 dark:bg-white/5">Generate SEO reports</li>
+          <li class="rounded-md border border-main bg-black/5 px-3 py-2 dark:bg-white/5">Send follow-up emails</li>
         </ul>
       </div>
     </article>

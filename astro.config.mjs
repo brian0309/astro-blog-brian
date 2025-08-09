@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 // Node helpers to scan content frontmatter for hidden posts
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, extname, basename } from 'node:path';
@@ -42,7 +42,6 @@ export default defineConfig({
   integrations: [
     mdx(),
     react(),
-    tailwind(),
     sitemap({
       // Exclude hidden blog posts from the generated sitemap
       serialize(item) {
@@ -55,4 +54,7 @@ export default defineConfig({
       },
     }),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
